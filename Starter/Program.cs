@@ -17,17 +17,24 @@ string[] studentNames = new string[] { "Sophia", "Andrew", "Emma", "Logan", "Bec
 
 int[][] studentScores = new int[][] {sophiaScores, andrewScores, emmaScores, loganScores, beckyScores, chrisScores, ericScores, gregorScores};
 
-Console.WriteLine("Student\t\tGrade\n");
+Console.WriteLine("Student\t\tExam Score\tOverall Grade\tExtra Credit\n");
 
 for(int i = 0; i < studentScores.Length; i++){
     int[] scores = studentScores[i];
-    int sum = 0;
+    int extraCredSum = 0;
+    int examSum = 0;
     for(int n = 0; n < scores.Length; n++){
         int score = scores[n];
-        sum += n < examAssignments ? score : (score / 10);
+
+        if(n >= examAssignments){
+            extraCredSum += score;
+        }
+        else{
+            examSum += score;
+        }
     }
 
-    decimal average = (decimal)sum / examAssignments;
+    decimal average = (examSum + (extraCredSum / 10m)) / examAssignments;
     string grade;
     if (average >= 97){
         grade = "A+";
@@ -68,7 +75,12 @@ for(int i = 0; i < studentScores.Length; i++){
     else {
         grade = "F";
     }
-    Console.WriteLine($"{studentNames[i]}:\t\t{average}\t{grade}");
+
+    decimal examScore = (decimal)examSum/examAssignments;
+    decimal extraCredit = (decimal)extraCredSum/(scores.Length-examAssignments);
+    decimal extraCreditPts = average - examScore;
+    
+    Console.WriteLine($"{studentNames[i]}\t\t{examScore}\t\t{average}\t{grade}\t{extraCredit}({extraCreditPts} pts)");
 }
 
 Console.WriteLine("Press the Enter key to continue");
