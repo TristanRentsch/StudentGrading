@@ -1,8 +1,11 @@
 ﻿using System;
 
-// initialize variables - graded assignments 
+// Represents the number of non-extra credit assignments.
 int examAssignments = 5;
 
+// Assignment grades for each student
+// The First X assignments are the exam assignments.
+// All assignments after these are extra credit.
 int[] sophiaScores = new int[] { 90, 86, 87, 98, 100, 94, 90 };
 int[] andrewScores = new int[] { 92, 89, 81, 96, 90, 89 };
 int[] emmaScores = new int[] { 90, 85, 87, 98, 68, 89, 89, 89 };
@@ -12,10 +15,9 @@ int[] chrisScores = new int[] { 84, 86, 88, 90, 92, 94, 96, 98 };
 int[] ericScores = new int[] { 80, 90, 100, 80, 90, 100, 80, 90 };
 int[] gregorScores = new int[] { 91, 91, 91, 91, 91, 91, 91 };    
 
-// Student names
-string[] studentNames = new string[] { "Sophia", "Andrew", "Emma", "Logan", "Becky", "Chris", "Eric", "Gregor" };
-
 int[][] studentScores = new int[][] {sophiaScores, andrewScores, emmaScores, loganScores, beckyScores, chrisScores, ericScores, gregorScores};
+
+string[] studentNames = new string[] { "Sophia", "Andrew", "Emma", "Logan", "Becky", "Chris", "Eric", "Gregor" };
 
 Console.WriteLine("Student\t\tExam Score\tOverall Grade\tExtra Credit\n");
 
@@ -33,6 +35,8 @@ for(int i = 0; i < studentScores.Length; i++){
             examSum += score;
         }
     }
+
+// Determine Letter Grade
 
     decimal average = (examSum + (extraCredSum / 10m)) / examAssignments;
     string grade;
@@ -79,7 +83,7 @@ for(int i = 0; i < studentScores.Length; i++){
     decimal examScore = (decimal)examSum/examAssignments;
     decimal extraCredit = (decimal)extraCredSum/(scores.Length-examAssignments);
     decimal extraCreditPts = average - examScore;
-    
+
     Console.WriteLine($"{studentNames[i]}\t\t{examScore}\t\t{average}\t{grade}\t{extraCredit}({extraCreditPts} pts)");
 }
 
